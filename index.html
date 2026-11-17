@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kadri UYĞUR | Mimarlık Portfolyosu</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Üst Header Alanı -->
+    <header class="site-header">
+        <div class="kisisel-bilgi">
+            <h1>Kadri UYĞUR</h1>
+            <p class="bio">
+                Mimarlık Öğrencisi / Mimar Sinan Güzel Sanatlar Üniversitesi
+            </p>
+        </div>
+        <nav class="site-nav">
+            <a href="#projects" class="aktif">Projects</a>
+        </nav>
+    </header>
+
+    <!-- Ana Proje Kartları Alanı (Deste / Stack Yapısı) -->
+    <main class="deste-konteyneri" id="projects">
+        
+        <!-- 1. Proje Kartı (Hasköy) -->
+        <div class="proje-karti" style="--base-rotate: -4deg; top: 10px; left: 30px;" data-card>
+            <div class="kart-icerik" onclick="ziyaretEt('haskoy.html')">
+                <div class="gorsel-cerceve">
+                    <img src="gençlik merkezi 1.png" alt="Hasköy Gençlik Merkezi">
+                </div>
+                <div class="kart-alt-bilgi">
+                    <div>
+                        <span class="proje-no">01</span>
+                        <span class="proje-adi">Hasköy Gençlik Merkezi</span>
+                    </div>
+                    <span class="detay-ok">&rarr;</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Proje Kartı (Moda) -->
+        <div class="proje-karti" style="--base-rotate: 3deg; top: 30px; left: 260px;" data-card>
+            <div class="kart-icerik" onclick="ziyaretEt('moda.html')">
+                <div class="gorsel-cerceve">
+                    <img src="sera 1.png" alt="Moda Permakültür Merkezi">
+                </div>
+                <div class="kart-alt-bilgi">
+                    <div>
+                        <span class="proje-no">02</span>
+                        <span class="proje-adi">Moda Permakültür Merkezi</span>
+                    </div>
+                    <span class="detay-ok">&rarr;</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Proje Kartı (Kahramanmaraş) -->
+        <div class="proje-karti" style="--base-rotate: -2deg; top: 15px; left: 490px;" data-card>
+            <div class="kart-icerik" onclick="ziyaretEt('kahramanmaras.html')">
+                <div class="gorsel-cerceve">
+                    <img src="toplu konut 1.png" alt="Kahramanmaraş Toplu Konut Projesi">
+                </div>
+                <div class="kart-alt-bilgi">
+                    <div>
+                        <span class="proje-no">03</span>
+                        <span class="proje-adi">Kahramanmaraş Toplu Konut</span>
+                    </div>
+                    <span class="detay-ok">&rarr;</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Proje Kartı (Adana) -->
+        <div class="proje-karti" style="--base-rotate: 2.5deg; top: 25px; left: 720px;" data-card>
+            <div class="kart-icerik" onclick="ziyaretEt('adana.html')">
+                <div class="gorsel-cerceve">
+                    <img src="pazar 1.png" alt="Adana'da Bir Pazar">
+                </div>
+                <div class="kart-alt-bilgi">
+                    <div>
+                        <span class="proje-no">04</span>
+                        <span class="proje-adi">Adana'da Bir Pazar</span>
+                    </div>
+                    <span class="detay-ok">&rarr;</span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Sürükleme ve Fizik Motoru -->
+    <script>
+        let highestZ = 10;
+
+        function ziyaretEt(url) {
+            if (!window.hasDragged) {
+                window.location.href = url;
+            }
+        }
+
+        document.querySelectorAll('[data-card]').forEach(card => {
+            let isDragging = false;
+            let startX, startY;
+            let posX = 0;
+            let posY = 0;
+            let lastX = 0;
+            let distanceMoved = 0;
+
+            function bringToFront() {
+                highestZ++;
+                card.style.zIndex = highestZ;
+            }
+
+            function dragStart(e) {
+                isDragging = true;
+                window.hasDragged = false;
+                distanceMoved = 0;
+                bringToFront();
+                card.classList.add('surukleniyor');
+
+                const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+                const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+
+                startX = clientX - posX;
+                startY = clientY - posY;
+                lastX = clientX;
+            }
+
+            function dragging(e) {
+                if (!isDragging) return;
+                
+                const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+                const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+
+                let moveX = Math.abs(clientX - (startX + posX));
+                let moveY = Math.abs(clientY - (startY + posY));
+                distanceMoved += moveX + moveY;
+
+                if (distanceMoved > 5) {
+                    window.hasDragged = true;
+                    e.preventDefault();
+                }
+
+                posX = clientX - startX;
+                posY = clientY - startY;
+
+                let velocityX = clientX - lastX;
+                lastX = clientX;
+
+                const baseRotate = card.style.getPropertyValue('--base-rotate');
+                const tilt = velocityX * 0.15; 
+
+                card.style.transform = `translate(${posX}px, ${posY}px) rotate(calc(${baseRotate} + ${tilt}deg)) scale(1.03)`;
+            }
+
+            function dragEnd() {
+                if (!isDragging) return;
+                isDragging = false;
+                card.classList.remove('surukleniyor');
+
+                const baseRotate = card.style.getPropertyValue('--base-rotate');
+                card.style.transform = `translate(${posX}px, ${posY}px) rotate(${baseRotate}) scale(1)`;
+                
+                setTimeout(() => {
+                    window.hasDragged = false;
+                }, 50);
+            }
+
+            card.addEventListener('mousedown', dragStart);
+            window.addEventListener('mousemove', dragging);
+            window.addEventListener('mouseup', dragEnd);
+
+            card.addEventListener('touchstart', dragStart, { passive: true });
+            window.addEventListener('touchmove', dragging, { passive: false });
+            window.addEventListener('touchend', dragEnd);
+
+            card.addEventListener('mousedown', bringToFront);
+            card.addEventListener('touchstart', bringToFront);
+        });
+    </script>
+</body>
+</html>

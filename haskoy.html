@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasköy Gençlik Merkezi | Kadri UYĞUR</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Üst Header Alanı -->
+    <header class="site-header">
+        <div class="kisisel-bilgi">
+            <h1>Kadri UYĞUR</h1>
+            <p class="bio">
+                Mimarlık Öğrencisi / Mimar Sinan Güzel Sanatlar Üniversitesi
+            </p>
+        </div>
+        <nav class="site-nav">
+            <a href="index.html#projects">Projects</a>
+        </nav>
+    </header>
+
+    <!-- Proje Detay İçeriği -->
+    <main class="detay-container">
+        
+        <!-- Geri Dönüş Butonu (Yönetmeliğe Uygun) -->
+        <a href="index.html" class="geri-buton">&larr; Projelere Geri Dön</a>
+
+        <!-- Proje Başlığı ve Açıklaması -->
+        <div class="proje-baslik-alani">
+            <h1>Hasköy Gençlik Merkezi</h1>
+        </div>
+        <div class="proje-aciklama">
+            <p>Proje, İstanbul Hasköy’de yaklaşık 300 m² kapalı alana sahip bir gençlik merkezi olarak tasarlanmıştır. Yapı, cam örtü ile birbirine bağlanan üç ayrı kütleden oluşmaktadır. Bu örtü, doğal ışık alımını artırırken yapıya bütüncül bir kimlik kazandırmaktadır.</p>
+            <p>Programda çok amaçlı salon, kafeterya ve çeşitli sosyal alanlar yer almaktadır. Kafeterya, arka cephede bulunan park ve meydanla doğrudan ilişki kurarak iç ve dış mekân sürekliliği sağlamaktadır.</p>
+            <p>Ahşap kaplama ve geniş cam yüzeylerden oluşan cephe tasarımı, çağdaş bir dil oluştururken çevredeki tarihi doku ile uyum gözetmektedir. Kırmızı Minare Camii ve çevresindeki tarihi yapılarla ilişkili olarak tasarlanan merkez, gençlerin sosyalleşme, üretme ve etkileşim ihtiyaçlarına cevap vermeyi amaçlamaktadır.</p>
+        </div>
+
+        <h3 class="galeri-baslik">Proje Görselleri (İncelemek için üzerine tıklayın veya sürükleyin)</h3>
+    </main>
+
+    <!-- 4 Adet Fotoğrafın Yer Aldığı Sürüklenebilir Deste Alanı -->
+    <div class="deste-konteyneri">
+        
+        <!-- 1. Fotoğraf -->
+        <div class="proje-karti" style="--base-rotate: -3deg; top: 10px; left: 30px;" data-card>
+            <div class="kart-icerik" onclick="resimBuyut('gençlik merkezi 1.png')">
+                <div class="gorsel-cerceve">
+                    <img src="gençlik merkezi 1.png" alt="Gençlik Merkezi 1">
+                </div>
+                <div class="kart-alt-bilgi">
+                    <div>
+                        <span class="proje-no">01 / 04</span>
+                        <span class="proje-adi">Genel Görünüm</span>
+                    </div>
+                    <span class="detay-ok">+</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Fotoğraf -->
+        <div class="proje-karti" style="--base-rotate: 2.5deg; top: 30px; left: 260px;" data-card>
+            <div class="kart-icerik" onclick="resimBuyut('gençlik merkezi 2.png')">
+                <div class="gorsel-cerceve">
+                    <img src="gençlik merkezi 2.png" alt="Gençlik Merkezi 2">
+                </div>
+                <div class="kart-alt-bilgi">
+                    <div>
+                        <span class="proje-no">02 / 04</span>
+                        <span class="proje-adi">Cephe Detayı</span>
+                    </div>
+                    <span class="detay-ok">+</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Fotoğraf -->
+        <div class="proje-karti" style="--base-rotate: -2deg; top: 15px; left: 490px;" data-card>
+            <div class="kart-icerik" onclick="resimBuyut('gençlik merkezi 3.png')">
+                <div class="gorsel-cerceve">
+                    <img src="gençlik merkezi 3.png" alt="Gençlik Merkezi 3">
+                </div>
+                <div class="kart-alt-bilgi">
+                    <div>
+                        <span class="proje-no">03 / 04</span>
+                        <span class="proje-adi">İç Mekan</span>
+                    </div>
+                    <span class="detay-ok">+</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Fotoğraf -->
+        <div class="proje-karti" style="--base-rotate: 3deg; top: 25px; left: 720px;" data-card>
+            <div class="kart-icerik" onclick="resimBuyut('gençlik merkezi 4.png')">
+                <div class="gorsel-cerceve">
+                    <img src="gençlik merkezi 4.png" alt="Gençlik Merkezi 4">
+                </div>
+                <div class="kart-alt-bilgi">
+                    <div>
+                        <span class="proje-no">04 / 04</span>
+                        <span class="proje-adi">Peyzaj & Meydan</span>
+                    </div>
+                    <span class="detay-ok">+</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Tam Ekran Fotoğraf Büyütme Penceresi (Lightbox) -->
+    <div class="lightbox" id="lightbox" onclick="resimKapat()">
+        <img id="lightbox-img" src="" alt="Büyük Görsel">
+    </div>
+
+    <!-- Sürükleme, Fizik ve Lightbox Scripti -->
+    <script>
+        let highestZ = 10;
+
+        function resimBuyut(src) {
+            if (!window.hasDragged) {
+                const lightbox = document.getElementById('lightbox');
+                const img = document.getElementById('lightbox-img');
+                img.src = src;
+                lightbox.style.display = 'flex';
+            }
+        }
+
+        function resimKapat() {
+            document.getElementById('lightbox').style.display = 'none';
+        }
+
+        document.querySelectorAll('[data-card]').forEach(card => {
+            let isDragging = false;
+            let startX, startY;
+            let posX = 0;
+            let posY = 0;
+            let lastX = 0;
+            let distanceMoved = 0;
+
+            function bringToFront() {
+                highestZ++;
+                card.style.zIndex = highestZ;
+            }
+
+            function dragStart(e) {
+                isDragging = true;
+                window.hasDragged = false;
+                distanceMoved = 0;
+                bringToFront();
+                card.classList.add('surukleniyor');
+
+                const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+                const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+
+                startX = clientX - posX;
+                startY = clientY - posY;
+                lastX = clientX;
+            }
+
+            function dragging(e) {
+                if (!isDragging) return;
+                
+                const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+                const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+
+                let moveX = Math.abs(clientX - (startX + posX));
+                let moveY = Math.abs(clientY - (startY + posY));
+                distanceMoved += moveX + moveY;
+
+                if (distanceMoved > 5) {
+                    window.hasDragged = true;
+                    e.preventDefault();
+                }
+
+                posX = clientX - startX;
+                posY = clientY - startY;
+
+                let velocityX = clientX - lastX;
+                lastX = clientX;
+
+                const baseRotate = card.style.getPropertyValue('--base-rotate');
+                const tilt = velocityX * 0.15; 
+
+                card.style.transform = `translate(${posX}px, ${posY}px) rotate(calc(${baseRotate} + ${tilt}deg)) scale(1.03)`;
+            }
+
+            function dragEnd() {
+                if (!isDragging) return;
+                isDragging = false;
+                card.classList.remove('surukleniyor');
+
+                const baseRotate = card.style.getPropertyValue('--base-rotate');
+                card.style.transform = `translate(${posX}px, ${posY}px) rotate(${baseRotate}) scale(1)`;
+                
+                setTimeout(() => {
+                    window.hasDragged = false;
+                }, 50);
+            }
+
+            card.addEventListener('mousedown', dragStart);
+            window.addEventListener('mousemove', dragging);
+            window.addEventListener('mouseup', dragEnd);
+
+            card.addEventListener('touchstart', dragStart, { passive: true });
+            window.addEventListener('touchmove', dragging, { passive: false });
+            window.addEventListener('touchend', dragEnd);
+
+            card.addEventListener('mousedown', bringToFront);
+            card.addEventListener('touchstart', bringToFront);
+        });
+    </script>
+</body>
+</html>
